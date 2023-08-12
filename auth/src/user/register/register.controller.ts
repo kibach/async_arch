@@ -2,11 +2,13 @@ import { Controller, Get, Post, Response, Session, Request } from '@nestjs/commo
 import { Response as ExpressResponse, Request as ExpressRequest } from 'express';
 import { UserRepositoryService } from 'src/oauth/repositories/UserRepositoryService';
 import { User } from '../entities/User';
+import { KafkaService } from 'src/kafka/kafka.service';
 
 @Controller('register')
 export class RegisterController {
     constructor(
         private readonly userRepository: UserRepositoryService,
+        private readonly kafkaService: KafkaService,
     ) {}
 
     @Get()
@@ -30,6 +32,26 @@ export class RegisterController {
         });
 
         await this.userRepository.persist(userEntity);
+
+        const kafkaProducer = await this.kafkaService.getProducer();
+
+        await kafkaProducer.send({
+            topic: 'nrhskwij-streaming.users',
+            messages: [
+                {
+                    key: userEntity.publicId,
+                    value: JSON.stringify({
+                        type: 'user.created',
+                        data: {
+                            publicId: userEntity.publicId,
+                            email: userEntity.email,
+                            name: userEntity.name,
+                            role: userEntity.role,
+                        },
+                    }),
+                }
+            ],
+        });
 
         session.user = { id: userEntity.id };
 

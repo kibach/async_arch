@@ -5,6 +5,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { OauthModule } from './oauth/oauth.module';
 import { User } from './user/entities/User';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { User } from './user/entities/User';
       inject: [ConfigService],
     }),
     OauthModule,
+    KafkaModule,
   ],
   controllers: [],
   providers: [],
