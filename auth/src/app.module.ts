@@ -3,11 +3,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { UserModule } from './user/user.module';
+import { OauthModule } from './oauth/oauth.module';
+import { User } from './user/entities/User';
 
 @Module({
   imports: [
     UserModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       useFactory: (config: ConfigService): TypeOrmModuleOptions => {
         return {
@@ -16,10 +18,13 @@ import { UserModule } from './user/user.module';
           username: config.get<string>('DB_USER'),
           password: config.get<string>('DB_PASSWORD'),
           database: config.get<string>('DB_DATABASE'),
+          entities: [User],
+          entitySkipConstructor: true,
         };
       },
       inject: [ConfigService],
     }),
+    OauthModule,
   ],
   controllers: [],
   providers: [],
