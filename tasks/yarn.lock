@@ -560,6 +560,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@golevelup/nestjs-discovery@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@golevelup/nestjs-discovery@npm:4.0.0"
+  dependencies:
+    lodash: ^4.17.21
+  peerDependencies:
+    "@nestjs/common": ^10.x
+    "@nestjs/core": ^10.x
+  checksum: 573e0a5ee1928e6dee4f72aa56587d03adca2f67fcb14381fb6467bcae8efcfd536fc410fedfc63716913f29e37d016bef779f9d49527efb61a60bf407afbaeb
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.10":
   version: 0.11.10
   resolution: "@humanwhocodes/config-array@npm:0.11.10"
@@ -2766,6 +2778,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:11.0.0":
+  version: 11.0.0
+  resolution: "commander@npm:11.0.0"
+  checksum: 6621954e1e1d078b4991c1f5bbd9439ad37aa7768d6ab4842de1dbd4d222c8a27e1b8e62108b3a92988614af45031d5bb2a2aaa92951f4d0c934d1a1ac564bb4
+  languageName: node
+  linkType: hard
+
 "commander@npm:4.1.1":
   version: 4.1.1
   resolution: "commander@npm:4.1.1"
@@ -2905,6 +2924,18 @@ __metadata:
     object-assign: ^4
     vary: ^1
   checksum: ced838404ccd184f61ab4fdc5847035b681c90db7ac17e428f3d81d69e2989d2b680cc254da0e2554f5ed4f8a341820a1ce3d1c16b499f6e2f47a1b9b07b5006
+  languageName: node
+  linkType: hard
+
+"cosmiconfig@npm:8.2.0":
+  version: 8.2.0
+  resolution: "cosmiconfig@npm:8.2.0"
+  dependencies:
+    import-fresh: ^3.2.1
+    js-yaml: ^4.1.0
+    parse-json: ^5.0.0
+    path-type: ^4.0.0
+  checksum: 836d5d8efa750f3fb17b03d6ca74cd3154ed025dffd045304b3ef59637f662bde1e5dc88f8830080d180ec60841719cf4ea2ce73fb21ec694b16865c478ff297
   languageName: node
   linkType: hard
 
@@ -5790,6 +5821,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nest-commander@npm:^3.11.1":
+  version: 3.11.1
+  resolution: "nest-commander@npm:3.11.1"
+  dependencies:
+    "@golevelup/nestjs-discovery": 4.0.0
+    commander: 11.0.0
+    cosmiconfig: 8.2.0
+    inquirer: 8.2.5
+  peerDependencies:
+    "@nestjs/common": ^8.0.0 || ^9.0.0 || ^10.0.0
+    "@nestjs/core": ^8.0.0 || ^9.0.0 || ^10.0.0
+    "@types/inquirer": ^8.1.3
+  checksum: 87f2b3e19370630fea9ac8f826b1865ee6dbb728e5c8629396ffa707b179a829a89525d8b899266449f0e29f7e70829ebbd758f335f8060e30f09282b937bd01
+  languageName: node
+  linkType: hard
+
 "node-abort-controller@npm:^3.0.1":
   version: 3.1.1
   resolution: "node-abort-controller@npm:3.1.1"
@@ -7208,6 +7255,7 @@ __metadata:
     jest: ^29.5.0
     kafkajs: ^2.2.4
     mysql2: ^3.6.0
+    nest-commander: ^3.11.1
     passport: ^0.6.0
     passport-jwt: ^4.0.1
     passport-oauth2: ^1.7.0
