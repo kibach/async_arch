@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
       },
       inject: [ConfigService],
     }),
+    KafkaModule,
   ],
   controllers: [],
   providers: [],
