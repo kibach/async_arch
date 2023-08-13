@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Kafka, Producer } from 'kafkajs';
+import { Consumer, Kafka, Producer } from 'kafkajs';
 
 @Injectable()
 export class KafkaService {
   private readonly kafka: Kafka;
   private _producer?: Producer;
+  private _consumer?: Consumer;
 
   constructor(private readonly config: ConfigService) {
     this.kafka = new Kafka({
@@ -30,5 +31,17 @@ export class KafkaService {
     await this._producer.connect();
 
     return this._producer;
+  }
+
+  async getConsumer(): Promise<Consumer> {
+    if (this._consumer !== undefined) {
+      return this._consumer;
+    }
+
+    this._consumer = this.kafka.consumer({ groupId: 'nrhskwij-popug-tasks' });
+
+    await this._consumer.connect();
+
+    return this._consumer;
   }
 }
