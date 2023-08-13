@@ -8,11 +8,8 @@ import { DashboardController } from './dashboard/dashboard.controller';
 import { KafkaModule } from 'src/kafka/kafka.module';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([User]),
-        KafkaModule,
-    ],
-    providers: [UserRepositoryService],
-    controllers: [LoginController, RegisterController, DashboardController],
+  imports: [TypeOrmModule.forFeature([User]), KafkaModule],
+  providers: [UserRepositoryService],
+  controllers: [LoginController, RegisterController, DashboardController],
 })
 export class UserModule {}
