@@ -4,7 +4,7 @@ import {
   OAuthToken,
   OAuthUser,
 } from '@jmondi/oauth2-server/index';
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Client } from './Client';
 import { User } from 'src/user/entities/User';
 import { Scope } from './Scope';
@@ -47,6 +47,7 @@ export class Token implements OAuthToken {
   user: User | null;
 
   @ManyToMany(() => Scope)
+  @JoinTable()
   scopes: Scope[];
 
   @Column('varchar', { nullable: true })

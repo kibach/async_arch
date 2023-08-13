@@ -9,6 +9,7 @@ import {
 } from '@jmondi/oauth2-server';
 import { AuthorizationCodeRepositoryService } from '../repositories/AuthorizationCodeRepositoryService';
 import { UserRepositoryService } from '../repositories/UserRepositoryService';
+import { CustomJWTService } from './jwt.service';
 
 @Injectable()
 export class OAuthService {
@@ -25,7 +26,8 @@ export class OAuthService {
       clientRepository,
       tokenRepository,
       scopeRepository,
-      new JwtService('test'),
+      new CustomJWTService('test'),
+      { requiresPKCE: false },
     );
     this.authorizationServer.enableGrantTypes(
       ['client_credentials', new DateInterval('1d')],

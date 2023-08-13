@@ -3,7 +3,7 @@ import {
   OAuthClient,
   OAuthScope,
 } from '@jmondi/oauth2-server';
-import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 import { Scope } from './Scope';
 import { randomUUID } from 'crypto';
 
@@ -35,6 +35,7 @@ export class Client implements OAuthClient {
   allowedGrants: GrantIdentifier[];
 
   @ManyToMany(() => Scope)
+  @JoinTable()
   scopes: OAuthScope[];
 
   constructor(args: CreateArgs) {

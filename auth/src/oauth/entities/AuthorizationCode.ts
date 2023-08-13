@@ -4,7 +4,7 @@ import {
   OAuthClient,
 } from '@jmondi/oauth2-server';
 import { User } from 'src/user/entities/User';
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Scope } from './Scope';
 import { Client } from './Client';
 import { randomUUID } from 'crypto';
@@ -48,6 +48,7 @@ export class AuthorizationCode implements OAuthAuthCode {
   client: Client;
 
   @ManyToMany(() => Scope)
+  @JoinTable()
   scopes: Scope[];
 
   constructor(args: CreateArgs) {

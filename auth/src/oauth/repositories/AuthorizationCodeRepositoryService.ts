@@ -39,7 +39,7 @@ export class AuthorizationCodeRepositoryService
   ): OAuthAuthCode {
     const authCodeEntity = new AuthorizationCode({
       client: client as Client,
-      user: user as User,
+      user: user === undefined ? null : user as User,
       scopes: scopes as Scope[],
       code: randomUUID(),
       codeChallenge: null,

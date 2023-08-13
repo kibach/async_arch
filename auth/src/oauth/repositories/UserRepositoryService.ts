@@ -33,7 +33,7 @@ export class UserRepositoryService implements OAuthUserRepository {
       return undefined;
     }
 
-    if (userEntity.passwordHash !== password) {
+    if (password !== undefined && userEntity.passwordHash !== password) {
       return undefined;
     }
 
