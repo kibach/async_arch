@@ -6,6 +6,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/User';
 import { Task } from './tasks/entities/Task';
+import { ConsumerModule } from './consumer/consumer.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { Task } from './tasks/entities/Task';
     KafkaModule,
     TasksModule,
     UserModule,
+    ConsumerModule,
   ],
   controllers: [],
   providers: [],

@@ -17,4 +17,8 @@ export class UserRepositoryService {
             },
         });
     }
+
+    async persist(user: User): Promise<void> {
+        await this.repository.save(user);
+    }
 }

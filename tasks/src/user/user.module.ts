@@ -14,5 +14,6 @@ import { UserRepositoryService } from './user.repository';
     ],
     controllers: [UserController],
     providers: [OAuthStrategy, OAuthAuthGuard, UserRepositoryService],
+    exports: [UserRepositoryService],
 })
 export class UserModule {}
