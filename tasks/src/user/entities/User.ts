@@ -1,30 +1,25 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 import { randomUUID } from 'crypto';
-import { OAuthUser } from '@jmondi/oauth2-server';
 
 type CreateArgs = {
   email: string;
-  passwordHash: string;
   name: string;
   role: string;
+  publicId: string;
 
-  publicId?: string;
   id?: string;
 };
 
 @Entity()
-export class User implements OAuthUser {
+export class User {
   @PrimaryColumn('char', { length: 36 })
-  readonly id: string;
+  id: string;
 
   @Column('char', { length: 36 })
-  readonly publicId: string;
+  publicId: string;
 
   @Column('varchar', { length: 50 })
-  readonly email: string;
-
-  @Column()
-  readonly passwordHash: string;
+  email: string;
 
   @Column()
   name: string;
@@ -35,17 +30,15 @@ export class User implements OAuthUser {
   constructor(args: CreateArgs) {
     const {
       email,
-      passwordHash,
       name,
       role,
-      publicId = randomUUID(),
+      publicId,
       id = randomUUID(),
     } = args;
 
     this.id = id;
     this.publicId = publicId;
     this.email = email;
-    this.passwordHash = passwordHash;
     this.role = role;
     this.name = name;
   }
