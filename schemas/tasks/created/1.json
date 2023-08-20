@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Task created event",
+    "type": "object",
+    "properties": {
+        "publicId": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "assigneePublicId": {
+            "type": "string"
+        },
+        "assignationFee": {
+            "type": "number"
+        },
+        "completionReward": {
+            "type": "number"
+        }
+    },
+    "required": [
+        "publicId",
+        "title",
+        "description",
+        "assigneePublicId",
+        "assignationFee",
+        "completionReward"
+    ]
+}
