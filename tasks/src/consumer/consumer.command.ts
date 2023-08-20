@@ -3,12 +3,16 @@ import { Command, CommandRunner, Option } from "nest-commander";
 import { KafkaService } from "src/kafka/kafka.service";
 import { UserRepositoryService } from "src/user/user.repository";
 import { UserMessageProcessorService } from "./user-message.service";
+import { EntityManager } from "typeorm";
+import { InjectEntityManager } from "@nestjs/typeorm";
 
 @Command({ name: 'consumer', description: 'Kafka event log consumer' })
 export class ConsumerCommand extends CommandRunner {
     private readonly logger: Logger;
 
     constructor(
+        @InjectEntityManager()
+        private readonly entityManager: EntityManager,
         private readonly kafkaService: KafkaService,
         private readonly userMessageProcessorService: UserMessageProcessorService,
     ) {
@@ -17,6 +21,11 @@ export class ConsumerCommand extends CommandRunner {
     }
 
     async run(passedParams: string[], options?: Record<string, any>): Promise<void> {
+        this.logger.log('Connecting to database');
+
+        // idk why this doenst happen automatically in CLI command context :/
+        // await this.entityManager.connection.initialize();
+
         this.logger.log('Starting Kafka consumer');
         
         const consumer = await this.kafkaService.getConsumer();

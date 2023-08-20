@@ -1,11 +1,11 @@
-import { randomBytes } from "crypto";
 import { randomUUID } from "crypto";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { User } from "src/user/entities/User";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm";
 
 type CreateArgs = {
     title: string;
     description: string;
-    assignee: null;
+    assignee: User;
     assignationFee: number;
     completionReward: number;
 
@@ -27,7 +27,8 @@ export class Task {
     @Column('text')
     description: string;
     
-    assignee: null; // User
+    @ManyToOne(() => User, { lazy: true })
+    assignee: User | Promise<User>;
 
     @Column('float')
     assignationFee: number;
@@ -47,7 +48,7 @@ export class Task {
             completionReward,
 
             id = randomUUID(),
-            publicId = 'POPUG-' + randomBytes(6).toString('hex'),
+            publicId = randomUUID(),
         } = args;
 
         this.title = title;
@@ -59,5 +60,13 @@ export class Task {
 
         this.id = id;
         this.publicId = publicId;
+    }
+
+    complete(): void {
+        this.isCompleted = true;
+    }
+
+    setAssignee(assignee: User): void {
+        this.assignee = assignee;
     }
 }

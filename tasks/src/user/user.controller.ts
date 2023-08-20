@@ -1,11 +1,16 @@
-import { Controller, Get, Res, UseGuards } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get, Req, Res, Session, UseGuards } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { OAuthAuthGuard } from './oauth.guard';
 
 @Controller()
 export class UserController {
-    @UseGuards(OAuthAuthGuard)
     @Get()
+    async root(@Res() res: Response): Promise<void> {
+        return res.redirect('/tasks');
+    }
+
+    @UseGuards(OAuthAuthGuard)
+    @Get('user')
     async index(
         @Res() res: Response,
     ): Promise<void> {
@@ -15,8 +20,12 @@ export class UserController {
     @UseGuards(OAuthAuthGuard)
     @Get('user/callback')
     async callback(
+        @Session() session: Record<string, any>,
+        @Req() req: Request,
         @Res() res: Response,
     ): Promise<void> {
-        res.redirect('/');
+        session.user = req.user;
+
+        res.redirect('/tasks');
     }
 }

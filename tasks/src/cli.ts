@@ -5,7 +5,9 @@ import { NestFactory } from '@nestjs/core';
 import { ConsumerModule } from './consumer/consumer.module';
 
 async function bootstrap() {
-    await CommandFactory.run(AppModule, new Logger());
+    await CommandFactory.run(AppModule, {
+        logger: new Logger(),
+    });
 }
 
 bootstrap();

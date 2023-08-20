@@ -9,6 +9,8 @@ export class UserMessageProcessorService {
     ) {}
 
     async handleUserCreated(messageData: Record<string, string>): Promise<void> {
+        console.log(this.userRepositoryService.repository.manager.connection.isInitialized);
+
         const publicId = messageData?.publicId ?? '';
 
         let userEntity = await this.userRepositoryService.getOneByPublicId(publicId);

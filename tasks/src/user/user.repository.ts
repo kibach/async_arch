@@ -7,7 +7,7 @@ import { Repository } from "typeorm";
 export class UserRepositoryService {
     constructor(
         @InjectRepository(User)
-        private readonly repository: Repository<User>,
+        readonly repository: Repository<User>,
     ) {}
 
     async getOneByPublicId(publicId: string): Promise<User | null> {
@@ -20,5 +20,13 @@ export class UserRepositoryService {
 
     async persist(user: User): Promise<void> {
         await this.repository.save(user);
+    }
+
+    async getManyWithRole(role: string): Promise<User[]> {
+        return this.repository.find({
+            where: {
+                role,
+            },
+        });
     }
 }
