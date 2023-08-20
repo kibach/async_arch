@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "User created event",
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "publicId": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "publicId",
+                "email",
+                "name",
+                "role"
+            ]
+        }
+    },
+    "required": [
+        "type",
+        "data"
+    ]
+}
